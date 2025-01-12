@@ -1,0 +1,80 @@
+# Judgarr Configuration Template
+
+# API Configuration
+api:
+  overseerr:
+    url: "http://localhost:5055"
+    api_key: ""
+  radarr:
+    url: "http://localhost:7878"
+    api_key: ""
+  sonarr:
+    url: "http://localhost:8989"
+    api_key: ""
+
+# Punishment Configuration
+punishment:
+  tracking_period_days: 30  # Rolling period for data usage tracking
+  thresholds:
+    warning: 500  # GB
+    mild: 750  # GB
+    severe: 1000  # GB
+    maximum: 1500  # GB
+  
+  cooldowns:
+    warning: 3  # days
+    mild: 5  # days
+    severe: 7  # days
+    maximum: 14  # days
+  
+  request_limits:
+    warning: 0  # No reduction
+    mild: -5  # Reduce by 5 requests
+    severe: -10  # Reduce by 10 requests
+    maximum: -15  # Reduce by 15 requests
+  
+  cooldown_increment: 3  # Days to increment cooldown per offense
+  request_limit_decrement: 5  # Number of requests to reduce per offense
+  max_cooldown_days: 100  # Maximum cooldown period
+  min_request_limit: 0  # Minimum request limit
+  exponential_factor: 1.5  # Factor for exponential punishment increase
+  cooldown_reset_days: 30  # Days after which cooldown resets
+
+# Tracking Configuration
+tracking:
+  history_days: 30  # Days of history to maintain
+  check_interval: 60  # Minutes between checks
+  size_thresholds:
+    warning: 500  # GB
+    punishment: 1000  # GB
+
+# Notification Configuration
+notifications:
+  discord:
+    enabled: false
+    webhook_url: ""
+  email:
+    enabled: false
+    smtp:
+      host: ""
+      port: 587
+      username: ""
+      password: ""
+      from_address: ""
+      use_tls: true
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "judgarr.log"
+  max_size: 10  # MB
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Database Configuration
+database:
+  path: "judgarr.db"
+  backup:
+    enabled: true
+    interval_days: 7
+    keep_backups: 4
